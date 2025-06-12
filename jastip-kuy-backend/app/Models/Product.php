@@ -18,6 +18,6 @@ class Product extends Model
         });
     }
 
-    protected $fillable = ['name', 'description', 'price', 'image'];
+    protected $fillable = ['name', 'price', 'image', 'kategori', 'waktu_scraping'];
 }
 

@@ -9,11 +9,15 @@ use App\Http\Controllers\CartController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/cek-email', [AuthController::class, 'cekEmail']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::put('/user/update', [AuthController::class, 'update']);
+    Route::put('/user/update-password', [AuthController::class, 'ubahPassword']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
     // Product routes
     Route::get('/products', [ProductController::class, 'index']);

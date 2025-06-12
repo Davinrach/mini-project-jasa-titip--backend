@@ -11,7 +11,16 @@ class ProductController extends Controller
     // Tampilkan semua produk
     public function index()
     {
-        $products = Product::all();
+        $products = Product::all()->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'nama' => $product->name,
+                'harga' => $product->price,
+                'kategori' => $product->kategori,
+                'gambar' => $product->image,
+                'waktu_scraping' => $product->waktu_scraping,
+            ];
+        });
 
         return response()->json([
             'success' => true,
@@ -32,10 +41,12 @@ class ProductController extends Controller
         $product = Product::create([
             'id' => Str::uuid(),
             'name' => $validated['name'],
-            'description' => $validated['description'] ?? null,
             'price' => $validated['price'],
             'image' => $validated['image'] ?? null,
+            'kategori' => $request->input('kategori'),
+            'waktu_scraping' => now()->format('m/d/y H:i'),
         ]);
+
 
         return response()->json([
             'success' => true,
@@ -57,7 +68,14 @@ class ProductController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $product,
+            'data' => [
+                'id' => $product->id,
+                'nama' => $product->name,
+                'harga' => $product->price,
+                'kategori' => $product->kategori,
+                'gambar' => $product->image,
+                'waktu_scraping' => $product->waktu_scraping,
+            ]
         ]);
     }
 

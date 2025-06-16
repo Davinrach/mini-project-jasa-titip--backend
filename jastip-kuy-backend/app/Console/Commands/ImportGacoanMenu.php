@@ -16,7 +16,7 @@ class ImportGacoanMenu extends Command
     
     public function handle()
     {
-                $path = storage_path('app/menu_grabfood.csv');
+                $path = storage_path('app/menu_gacoan_1.csv');
 
         if (!file_exists($path)) {
             $this->error("File tidak ditemukan: $path");
